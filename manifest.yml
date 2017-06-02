@@ -1,0 +1,4 @@
+name: watson-discovery-news-trending-topics
+command: npm start
+services:
+  - my-discovery-service
