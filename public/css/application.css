@@ -1134,6 +1134,9 @@ li.recharts-legend-item::before {
   margin-top: 0rem;
   padding-top: 3rem;
   padding-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .results ._container {
@@ -1174,9 +1177,6 @@ li.recharts-legend-item::before {
 }
 
 @media (min-width: 720px) {
-  .results {
-    display: flex;
-  }
   .results--panel-1 {
     width: 48.93617%;
     margin-right: 2.12766%;
@@ -1564,6 +1564,12 @@ li.recharts-legend-item::before {
   margin-top: 0rem;
   font-size: 1.5em;
   text-align: center;
+}
+
+@media(min-width: 1200px) {
+  .results ._container {
+    max-width: 50%;
+  }
 }
 
 @media (min-width: 560px) {
