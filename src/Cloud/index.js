@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Colors } from 'watson-react-components';
 
 const MAX_SIZE = 50;
 const MIN_SIZE = 16;
@@ -8,11 +9,11 @@ let ratio;
 let computeSize;
 
 const topicStory = item => item.aggregations[0].hits.hits[0];
-const getSentiment = item => {
+const getSentimentColor = item => {
   switch (topicStory(item).docSentiment.type) {
-  case 'negative': return '👎';
-  case 'positive': return '👍';
-  default: return '';
+  case 'negative': return Colors.red_50;
+  case 'positive': return Colors.green_50;
+  default: return Colors.gray_50;
   }
 };
 
@@ -27,29 +28,21 @@ const Cloud = props => {
       {
         props.data ?
         props.data.map((item, index) =>
-          <div className="top-topics--wrapper" key={`${index}-${item.key}`}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={topicStory(item).url}
-              className="top-topics--word"
-              title={item.matching_results}
-              style={{
-                fontSize: `${computeSize(item.matching_results)}px`,
-                fontWeight: (computeSize(item.matching_results) < 13 ? 400 : null),
-              }}
-            >
-              {item.key}
-            </a> 
-            <span
-              style={{
-                fontSize: `${computeSize(item.matching_results)}px`,
-                fontWeight: (computeSize(item.matching_results) < 13 ? 400 : null),
-              }}
-            >
-              {getSentiment(item)}
-            </span>
-          </div>) :
+          <a
+            key={`${index}-${item.key}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            href={topicStory(item).url}
+            className="top-topics--word"
+            title={item.matching_results}
+            style={{
+              fontSize: `${computeSize(item.matching_results)}px`,
+              fontWeight: (computeSize(item.matching_results) < 13 ? 400 : null),
+              color: getSentimentColor(item)
+            }}
+          >
+            {item.key}
+          </a>) :
         []
       }
     </div>

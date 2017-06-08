@@ -15,6 +15,7 @@ class DefaultLayout extends React.Component {
           <meta name="og:description" content={this.props.description} />
           <link rel="stylesheet" type="text/css" href="/css/watson-react-components.min.css" />
           <link rel="stylesheet" type="text/css" href="/css/application.css"/>
+          <link rel="alternate" type="application/rss+xml" href="/feed" />
         </head>
         <body>
           <Header
@@ -30,7 +31,7 @@ class DefaultLayout extends React.Component {
             apiReference="http://www.ibm.com/watson/developercloud/discovery/api"
             startInBluemix=""
             version="GA"
-            description="This is a web app to help you find Trending Topics in the News using Watson Discovery Service."
+            description="This is a web app to help you find Trending Topics in the News using Watson Discovery Service. You can subscribe to these trending topics and the story for that trending topic using a RSS feed reader by clicking on the RSS button below."
           />
           <main>{this.props.children}</main>
           <script

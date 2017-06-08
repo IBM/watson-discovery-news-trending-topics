@@ -3,13 +3,6 @@ import React from 'react';
 import { Icon } from 'watson-react-components';
 import Cloud from './Cloud';
 
-const parseData = data => {
-  data.topics = data.aggregations[0]
-                    .results;
-
-  return data;
-};
-
 class Main extends React.Component {
 
   constructor(...props) {
@@ -73,7 +66,12 @@ class Main extends React.Component {
               <div className="row">
                 <div className="top-stories widget">
                   <div className="widget--header">
-                    <h2 className="base--h2 widget--header-title">Trending Topics in News</h2>
+                    <h1 className="base--h2 widget--header-title">
+                      Trending Topics in News
+                      <a href="/feed" className="rss-feed--icon">
+                        <img src="/images/feed-icon.png" />
+                      </a>
+                    </h1>
                     <div className="widget--header-spacer" />
                   </div>
                   <div className="top-stories--list">
@@ -88,5 +86,12 @@ class Main extends React.Component {
     );
   }
 }
+
+const parseData = data => {
+  data.topics = data.aggregations[0]
+                    .results;
+
+  return data;
+};
 
 module.exports = Main;

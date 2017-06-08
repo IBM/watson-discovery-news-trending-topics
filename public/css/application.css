@@ -1194,15 +1194,12 @@ li.recharts-legend-item::before {
   transform: scale(.9, .9);
 }
 
-.top-topics--wrapper {
-  text-align: center;
-}
-
 .top-topics--word {
   margin: auto;
-  display: inline;
+  display: inline-block;
   margin-right: 1.5rem;
   font-weight: 300;
+  border: none;
 }
 
 .top-entities .tab-panels--tab.base--a {
@@ -1895,4 +1892,10 @@ input:focus, button:focus, textarea:focus {
   .query--flex-container .query--date-buttons-container {
     font-size: x-small;
   }
+}
+
+.rss-feed--icon {
+  margin-left: 10px;
+  text-decoration: none;
+  border: none;
 }

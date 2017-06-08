@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
 const expressBrowserify = require('express-browserify');
 
 const app = express();
@@ -10,9 +9,8 @@ app.set('view engine', 'js');
 app.engine('js', require('express-react-views').createEngine());
 
 // Middlewares
-app.use(bodyParser.json({ limit: '1mb' }));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/css', express.static(path.resolve(__dirname, '..', 'public/css')));
+app.use('/images', express.static(path.resolve(__dirname, '..', 'public/images')));
 app.use(express.static(path.join(__dirname, '..', 'node_modules/watson-react-components/dist')));
 
 const isDev = (app.get('env') === 'development');
