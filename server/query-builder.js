@@ -11,11 +11,14 @@ module.exports = {
   setCollectionId(collectionId) {
     this.collection_id = collectionId;
   },
-  build(queryOpts) {
+  build(queryOpts = {}) {
+    const { filter } = queryOpts;
+    const timeAndSourceFilter = `blekko.chrondate>${moment().subtract(24,'h').unix()},blekko.hostrank>300`;
+
     const params = Object.assign({
       environment_id: this.environment_id,
       collection_id: this.collection_id,
-      filter: `blekko.chrondate>${moment().subtract(24,'h').unix()},blekko.hostrank>300`,
+      filter: filter ? `${filter},${timeAndSourceFilter}` : timeAndSourceFilter,
       return: 'enrichedTitle.entities.text',
       aggregations
     }, queryOpts);
