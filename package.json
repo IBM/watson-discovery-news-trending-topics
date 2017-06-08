@@ -8,6 +8,7 @@
     "start": "node index.js",
     "start:watch": "nodemon index.js",
     "bootstrap": "cp .env.sample .env",
+    "test": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -39,9 +40,12 @@
     "ignore": "node_modules"
   },
   "devDependencies": {
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-react": "^7.0.1",
-    "nodemon": "^1.11.0"
+    "jest": "^20.0.4",
+    "nodemon": "^1.11.0",
+    "react-addons-test-utils": "^15.5.1"
   }
 }
