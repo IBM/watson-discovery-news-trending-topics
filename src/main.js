@@ -4,6 +4,7 @@ import { Icon } from 'watson-react-components';
 import Cloud from './Cloud';
 import Query from './Query';
 import queryBuilder from '../server/query-builder';
+import { parseData } from './utils';
 
 class Main extends React.Component {
 
@@ -92,10 +93,5 @@ class Main extends React.Component {
     );
   }
 }
-
-const parseData = data => ({
-  topics: data.aggregations[0].results,
-  rawData: data
-});
 
 module.exports = Main;

@@ -2,6 +2,8 @@ require('isomorphic-fetch');
 const queryBuilder = require('./query-builder');
 const discovery = require('./watson-discovery-service');
 const RSS = require('rss');
+const utils = require('../src/utils');
+const { parseData, topicStory } = utils;
 
 const WatsonNewsServer = new Promise((resolve, reject) => {
   discovery.getEnvironments({})
@@ -84,10 +86,5 @@ function createServer() {
 
   return server;
 }
-
-const topicStory = item => item.aggregations[0].hits.hits[0];
-const parseData = data => ({
-  topics: data.aggregations[0].results
-});
 
 module.exports = WatsonNewsServer;

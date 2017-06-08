@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Colors } from 'watson-react-components';
+import { topicStory } from '../utils';
 
 const MAX_SIZE = 50;
 const MIN_SIZE = 16;
@@ -8,7 +9,6 @@ let largest;
 let ratio;
 let computeSize;
 
-const topicStory = item => item.aggregations[0].hits.hits[0];
 const getSentimentColor = item => {
   switch (topicStory(item).docSentiment.type) {
   case 'negative': return Colors.red_50;
