@@ -34,8 +34,7 @@ function createServer() {
   server.get('/feed', (req, res, next) => {
     const feed = new RSS({
       title: 'Watson News Trending Topics',
-      description: 'RSS feed for Trending Topics found using Watson Discovery Service',
-      feed_url: 'https://watson-discovery-news-trending-topics.mybluemix.net/rss.xml',
+      description: 'RSS feed for Trending Topics found using Watson Discovery Service'
     });
 
     fetch(`http://localhost:${process.env.PORT}/api/trending`, {
@@ -46,11 +45,18 @@ function createServer() {
       if (response.ok) {
         response.json()
           .then((json) => {
-            const data = parseData(json);
-            data.topics.forEach(item => {
+            const { topics } = parseData(json);
+            topics.forEach(item => {
+              const story = topicStory(item);
+              const categories = story.enrichedTitle.taxonomy.reduce((result, categories) =>
+                result.concat(categories.label.split('/').slice(1)), []);
               feed.item({
+                guid: story.id,
                 title: item.key,
-                url: topicStory(item).url
+                url: story.url,
+                description: story.enrichedTitle.text,
+                author: story.author,
+                categories
               });
             });
 
@@ -80,11 +86,8 @@ function createServer() {
 }
 
 const topicStory = item => item.aggregations[0].hits.hits[0];
-const parseData = data => {
-  data.topics = data.aggregations[0]
-                    .results;
-
-  return data;
-};
+const parseData = data => ({
+  topics: data.aggregations[0].results
+});
 
 module.exports = WatsonNewsServer;

@@ -2,6 +2,8 @@ import 'isomorphic-fetch';
 import React from 'react';
 import { Icon } from 'watson-react-components';
 import Cloud from './Cloud';
+import Query from './Query';
+import queryBuilder from '../server/query-builder';
 
 class Main extends React.Component {
 
@@ -76,6 +78,10 @@ class Main extends React.Component {
                   </div>
                   <div className="top-stories--list">
                     <Cloud data={data.topics} />
+                    <Query
+                      title="Query to the Discovery Service"
+                      query={queryBuilder.build()}
+                    />
                   </div>
                 </div>
               </div>
@@ -87,11 +93,9 @@ class Main extends React.Component {
   }
 }
 
-const parseData = data => {
-  data.topics = data.aggregations[0]
-                    .results;
-
-  return data;
-};
+const parseData = data => ({
+  topics: data.aggregations[0].results,
+  rawData: data
+});
 
 module.exports = Main;
