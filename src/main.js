@@ -6,6 +6,7 @@ import Cloud from './Cloud';
 import Query from './Query';
 import queryBuilder from '../server/query-builder';
 import { parseData } from './utils';
+import categories from './taxonomy';
 
 class Main extends React.Component {
 
@@ -62,7 +63,7 @@ class Main extends React.Component {
 
     return (
       <div className="results">
-        <div className="_container _container_large">
+        <div className="_container">
           <div className="row">
             <div className="top-stories widget">
               <div className="widget--header">
@@ -89,6 +90,20 @@ class Main extends React.Component {
                   />
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+        <div className="_container">
+          <div className="row">
+            <div className="top-stories widget">
+              <h2>Trending Topics in Other Categories</h2>
+              <div>You can also view trending topics for certain categories below and subscribe to its RSS feed:</div>
+              <ul>
+                {categories.map(category => 
+                  <li key={category}>
+                    <a href={category} target="_blank" rel="noopener noreferrer">{category.toUpperCase().substring(1)}</a>
+                  </li>)}
+              </ul>
             </div>
           </div>
         </div>

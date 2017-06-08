@@ -18,10 +18,11 @@ module.exports = {
     const params = Object.assign({
       environment_id: this.environment_id,
       collection_id: this.collection_id,
-      filter: filter ? `${filter},${timeAndSourceFilter}` : timeAndSourceFilter,
       return: 'enrichedTitle.entities.text',
       aggregations
-    }, queryOpts);
+    }, queryOpts, {
+      filter: filter ? `${filter},${timeAndSourceFilter}` : timeAndSourceFilter
+    });
 
     return params;
   },

@@ -31,25 +31,16 @@ class DefaultLayout extends React.Component {
             apiReference="http://www.ibm.com/watson/developercloud/discovery/api"
             startInBluemix=""
             version="GA"
-            description={<div>
-              <div>This is a web app to help you find Trending Topics in the News
+            description={`This is a web app to help you find Trending Topics in the News
               using Watson Discovery Service. You can subscribe to these trending
               topics and the story for that trending topic using a RSS feed reader
-              by clicking on the RSS button below.</div>
-              <div>You can also view trending topics for certain categories below and subscribe to its RSS feed:</div>
-              <ul>
-                <li><a href="/politics" target="_blank" rel="noopener noreferrer">Politics</a></li>
-                <li><a href="/technology%20and%20computing" target="_blank" rel="noopener noreferrer">Technology and Computing</a></li>
-                <li><a href="/automotive%20and%20vehicles" target="_blank" rel="noopener noreferrer">Automotive and Vehicles</a></li>
-                <li><a href="/energy" target="_blank" rel="noopener noreferrer">Energy</a></li>
-              </ul>
-            </div>}
+              by clicking on the RSS button below.`}
           />
           <main>{this.props.children}</main>
           <script
             type="text/javascript"
             id="bootstrap-data"
-            dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${this.props.initialData}`}}
+            dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${this.props.initialData};`}}
           ></script>
           <script type="text/javascript" src="/js/bundle.js" />
         </body>

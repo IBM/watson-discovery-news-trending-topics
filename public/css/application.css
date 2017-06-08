@@ -1136,6 +1136,10 @@ li.recharts-legend-item::before {
   padding-bottom: 6rem;
 }
 
+.results ._container {
+  margin: 20px 0;
+}
+
 .results .base--h1,
 .results .base--h2 {
   color: #000;
@@ -1170,6 +1174,9 @@ li.recharts-legend-item::before {
 }
 
 @media (min-width: 720px) {
+  .results {
+    display: flex;
+  }
   .results--panel-1 {
     width: 48.93617%;
     margin-right: 2.12766%;
@@ -1416,6 +1423,7 @@ li.recharts-legend-item::before {
 .loader--container {
   text-align: center;
   padding: 3rem;
+  margin: 0 auto;
 }
 
 .code-results {
