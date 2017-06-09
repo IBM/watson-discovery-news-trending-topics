@@ -48,7 +48,7 @@ function createServer() {
     const category = req.params[0];
 
     fetch(`http://localhost:${process.env.PORT}/api/trending/${category ? category : ''}`)
-    .then((response) => {
+    .then(response => {
       if (response.ok) {
         response.json()
           .then(json => {
