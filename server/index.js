@@ -46,24 +46,26 @@ function createServer() {
 
   server.get('/feed/*', (req, res, next) => {
     const category = req.params[0];
-    const feed = new RSS({
-      title: 'Watson News Trending Topics',
-      description: 'RSS feed for Trending Topics found using Watson Discovery Service'
-    });
 
-    fetch(`http://localhost:${process.env.PORT}/api/trending/${category ? category : ''}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
+    fetch(`http://localhost:${process.env.PORT}/api/trending/${category ? category : ''}`)
     .then((response) => {
       if (response.ok) {
         response.json()
-          .then((json) => {
+          .then(json => {
             const { topics } = parseData(json);
+            const feed = new RSS({
+              title: 'Watson News Trending Topics',
+              description: 'RSS feed for Trending Topics found using Watson Discovery Service'
+            });
+
             topics.forEach(item => {
               const story = topicStory(item);
-              const categories = story.enrichedTitle.taxonomy.reduce((result, categories) =>
-                result.concat(categories.label.split('/').slice(1)), []);
+              let categories = [];
+              if (story.enrichedTitle.taxonomy) {
+                categories = story.enrichedTitle.taxonomy
+                  .reduce((result, categories) =>
+                    result.concat(categories.label.split('/').slice(1)), []);
+              }
               feed.item({
                 guid: story.id,
                 title: item.key,
@@ -82,7 +84,8 @@ function createServer() {
         .then(error => next(error))
         .catch(errorMessage => next(errorMessage));
       }
-    });
+    })
+    .catch(error => next(error));
   });
 
   server.get('/*', function(req, res) {
