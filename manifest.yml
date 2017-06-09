@@ -5,7 +5,7 @@ declared-services:
     plan: free
 applications:
 - path: .
-  name: watson-discovery-news-trending-topics
+  name: watson-trending-topics
   buildpack: sdk-for-nodejs
   memory: 512M
   instances: 1
