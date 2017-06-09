@@ -11,8 +11,8 @@ class DefaultLayout extends React.Component {
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="og:title" content="Watson Discovery New Search" />
-          <meta name="og:description" content={this.props.description} />
+          <meta name="og:title" content="Watson Discovery Trending Topics in News" />
+          <meta name="og:description" content={this.props.description || 'Get RSS Feed for Trending Topics in News'} />
           <link rel="stylesheet" type="text/css" href="/css/watson-react-components.min.css" />
           <link rel="stylesheet" type="text/css" href="/css/application.css"/>
           <link rel="alternate" type="application/rss+xml" href="/feed" />
@@ -50,7 +50,7 @@ class DefaultLayout extends React.Component {
 }
 
 DefaultLayout.propTypes = {
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   children: PropTypes.node.isRequired,
   initialData: PropTypes.string.isRequired
 };
