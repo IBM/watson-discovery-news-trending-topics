@@ -13,4 +13,3 @@ applications:
   random-route: true
   services:
   - my-discovery-service
-  - my-nlu-service
