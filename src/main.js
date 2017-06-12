@@ -35,29 +35,39 @@ class Main extends React.Component {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
-    .then((response) => {
+    .then(response => {
       if (response.ok) {
-        response.json()
-          .then((json) => {
-            this.setState({ data: parseData(json), loading: false });
-          });
-      } else {
-        response.json()
-        .then((error) => this.setState({ error, loading: false }))
-        .catch((errorMessage) => {
-          // eslint-disable-next-line no-console
-          console.error(errorMessage);
-          this.setState({
-            error: { error: 'There was a problem with the request, please try again' },
-            loading: false,
-          });
-        });
+        return response.json();
       }
+      throw response;
+    })
+    .then(json => {
+      this.setState({
+        data: parseData(json),
+        loading: false,
+        error: null
+      });
+    })
+    .catch(response => {
+      let error;
+      if (response && response.status === 429) {
+        error = 'Number of free queries per month exceeded';
+      } else {
+        error = 'Error fetching data from the server';
+      }
+
+      // eslint-disable-next-line no-console
+      console.error(response);
+      this.setState({
+        data: null,
+        error,
+        loading: false
+      });
     });
   }
 
   render() {
-    const { loading, data } = this.state;
+    const { loading, data, error } = this.state;
     const { category } = this.props;
     const filter = category ? `taxonomy.label:"${category}"` : '';
 
@@ -75,10 +85,10 @@ class Main extends React.Component {
                 </h1>
                 <div className="widget--header-spacer" />
               </div>
-              {!data || loading ? (
+              {loading || !data ? (
                 <div className="results">
                   <div className="loader--container">
-                    <Icon type="loader" size="large" />
+                    {error ? error : <Icon type="loader" size="large" />}
                   </div>
                 </div>
               ) : (

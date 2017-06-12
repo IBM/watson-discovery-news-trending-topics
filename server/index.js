@@ -40,7 +40,12 @@ function createServer() {
       // eslint-disable-next-line no-console
       console.error(error);
 
-      next(error);
+      switch (error.message) {
+      case 'Number of free queries per month exceeded':
+        return res.status(429).json(error);
+      default:
+        next(error);
+      }
     });
   });
 
@@ -50,42 +55,44 @@ function createServer() {
     fetch(`http://localhost:${process.env.PORT}/api/trending/${category ? category : ''}`)
     .then(response => {
       if (response.ok) {
-        response.json()
-          .then(json => {
-            const { topics } = parseData(json);
-            const feed = new RSS({
-              title: 'Watson News Trending Topics',
-              description: 'RSS feed for Trending Topics found using Watson Discovery Service'
-            });
-
-            topics.forEach(item => {
-              const story = topicStory(item);
-              let categories = [];
-              if (story.enrichedTitle.taxonomy) {
-                categories = story.enrichedTitle.taxonomy
-                  .reduce((result, categories) =>
-                    result.concat(categories.label.split('/').slice(1)), []);
-              }
-              feed.item({
-                guid: story.id,
-                title: item.key,
-                url: story.url,
-                description: story.enrichedTitle.text,
-                author: story.author,
-                categories
-              });
-            });
-
-            res.set('Content-Type', 'text/xml').send(feed.xml());
-          })
-          .catch(error => next(error));
-      } else {
-        response.json()
-        .then(error => next(error))
-        .catch(errorMessage => next(errorMessage));
+        return response.json();
       }
+      throw response;
     })
-    .catch(error => next(error));
+    .then(json => {
+      const { topics } = parseData(json);
+      const feed = new RSS({
+        title: 'Watson News Trending Topics',
+        description: 'RSS feed for Trending Topics found using Watson Discovery Service'
+      });
+
+      topics.forEach(item => {
+        const story = topicStory(item);
+        let categories = [];
+        if (story.enrichedTitle.taxonomy) {
+          categories = story.enrichedTitle.taxonomy
+            .reduce((result, categories) =>
+              result.concat(categories.label.split('/').slice(1)), []);
+        }
+        feed.item({
+          guid: story.id,
+          title: item.key,
+          url: story.url,
+          description: story.enrichedTitle.text,
+          author: story.author,
+          categories
+        });
+      });
+
+      res.set('Content-Type', 'text/xml').send(feed.xml());
+    })
+    .catch(response => {
+      if (response && response.status === 429) {
+        res.status(429).json({ error: 'Number of free queries per month exceeded' });
+      } else {
+        next(response);
+      }
+    });
   });
 
   server.get('/*', function(req, res) {
