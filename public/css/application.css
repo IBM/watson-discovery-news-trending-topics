@@ -1,3 +1,13 @@
+/*! CSS Used from: http://localhost:3333/css/watson-react-components.min.css */
+
+.base--pre,
+.base--pre code,
+code,
+pre,
+pre code {
+    font-family: source-code-pro, Menlo, Consolas, monospace;
+}
+
 div::after,
 div::before,
 header::after,
@@ -8,6 +18,7 @@ header::before {
 }
 
 body,
+code,
 div,
 h1,
 h2,
@@ -18,6 +29,7 @@ li,
 main,
 nav,
 p,
+pre,
 section,
 span,
 ul {
@@ -64,6 +76,20 @@ img {
 
 svg:not(:root) {
     overflow: hidden;
+}
+
+pre {
+    overflow: auto;
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: pre-line;
+    word-wrap: break-word;
+}
+
+code,
+pre {
+    font-size: 1em;
+    font-family: monospace, sans-serif;
 }
 
 *,
@@ -138,6 +164,52 @@ p {
     color: #121212;
 }
 
+code {
+    padding: .2em .5em;
+    font-size: .8em;
+    color: #008571;
+    outline: 1px solid rgba(199, 199, 199, .25);
+}
+
+.base--pre,
+.base--pre code,
+pre,
+pre code {
+    display: block;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    word-spacing: normal;
+    text-align: left;
+    word-break: normal;
+    white-space: pre;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-tab-size: 2;
+    tab-size: 2;
+    overflow-y: overlay;
+}
+
+.base--pre,
+pre {
+    margin: .5em 0;
+    overflow: auto;
+    margin-top: 0rem;
+    white-space: normal;
+    padding: 1rem 2rem;
+    background-color: #f0f2f4;
+    color: #121212;
+    font-size: .875em;
+}
+
+.base--pre code,
+pre code {
+    font-size: 1em;
+    outline: 0;
+    margin: 0rem;
+    padding: 0rem;
+}
+
 .base--ul,
 ul {
     padding-left: 0;
@@ -199,32 +271,6 @@ ul li::before {
     color: inherit;
 }
 
-.loader-container {
-    display: inline-block;
-    width: 5.625rem;
-    height: 5.625rem;
-}
-
-.loader {
-    height: 100%;
-    width: 100%;
-    transform: translateZ(0) rotate(300deg);
-    transform-origin: 25px 25px;
-    transform-origin: center center;
-    animation: b 4s ease-out infinite;
-}
-
-.loader--path {
-    stroke-dasharray: 125px;
-    stroke-dashoffset: 9.7px;
-    fill: transparent;
-    stroke: #9855d4;
-    stroke-width: 4.65116px;
-    stroke-linecap: butt;
-    transition: stroke-dashoffset 1s cubic-bezier(.5, .08, 0, 1);
-    animation: a 4s ease-out infinite;
-}
-
 ._container {
     width: 100%;
     margin: auto;
@@ -239,6 +285,39 @@ ul li::before {
 
 ._container_large {
     max-width: 1024px;
+}
+
+code[class*=language-] ::-moz-selection,
+pre[class*=language-] ::-moz-selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+code[class*=language-] ::selection,
+pre[class*=language-] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+.token.punctuation {
+    color: #777677;
+}
+
+.token.property {
+    color: #9855d4;
+}
+
+.token.string {
+    color: #db2780;
+}
+
+.token.operator {
+    color: #a67f59;
+    background: rgba(255, 255, 255, .5);
+}
+
+.prism {
+    position: relative;
 }
 
 .base--h2 {
@@ -266,11 +345,6 @@ ul li::before {
 .icon_small {
     height: 1rem;
     width: 1rem;
-}
-
-.icon_large {
-    height: 4rem;
-    width: 4rem;
 }
 
 .row {
@@ -465,15 +539,6 @@ ul li::before {
     border-bottom: 1px solid #121212;
 }
 
-.loader-container {
-    width: auto;
-    height: auto;
-}
-
-.loader--path {
-    stroke: #959595;
-}
-
 ._full-width-row {
     padding: 4rem 0rem;
     margin-top: 0rem;
@@ -484,7 +549,7 @@ ul li::before {
 }
 
 
-/*! CSS Used from: https://watson-discovery-news-trending-topics.mybluemix.net/css/application.css */
+/*! CSS Used from: http://localhost:3333/css/application.css */
 
 main {
     margin-top: 0rem;
@@ -521,10 +586,57 @@ main {
     color: #000;
 }
 
-.loader--container {
-    text-align: center;
-    padding: 3rem;
-    margin: 0 auto;
+.top-topics--cloud {
+    display: block;
+    transform: scale(.9, .9);
+}
+
+.top-topics--word {
+    margin: auto;
+    display: inline-block;
+    margin-right: 1.5rem;
+    font-weight: 300;
+    border: none;
+}
+
+.code-results {
+    background-color: #0b0e0f;
+}
+
+.code-results--header-row {
+    display: block;
+    padding: 1rem 1rem 0rem;
+}
+
+.code-results--header-spacer {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin-top: 0rem;
+}
+
+.code-results--header.base--h2 {
+    color: #fdfdfd;
+    margin-top: 0rem;
+    font-size: 1.5em;
+}
+
+.code-results .base--pre {
+    background-color: transparent;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: #c7c7c7;
+    max-height: 24rem;
+    overflow: visible;
+}
+
+.code-results .base--pre code {
+    overflow: visible;
+}
+
+.code-block--code {
+    padding-bottom: 2rem;
+    overflow: auto;
 }
 
 .widget {
@@ -584,6 +696,25 @@ main {
     .widget--header-title {
         font-size: 2.25em;
     }
+    .code-results--header.base--h2 {
+        font-size: 2.25em;
+    }
+    .code-results--header-row {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 1rem 2rem 0rem;
+    }
+}
+
+.token.operator {
+    background-color: #0b0e0f;
 }
 
 .rss-feed--icon {
