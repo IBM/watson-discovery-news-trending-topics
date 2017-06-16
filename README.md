@@ -2,7 +2,7 @@
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/watson-discovery-news-trending-topics)
 
-In this developer journey we will build a RSS News Feed generator for Trending Topics for the past 24 hours for the entire news in general or a specific industry/category such as (technology and computing or automobile and vehicles, etc.). This journey explores the use of Discovery Service to get the most trending topics in news or a specific category of news.
+In this developer journey we will build a RSS News Feed generator for Trending Topics for the past 24 hours for the entire news in general or a specific industry/category such as (technology and computing or automobile and vehicles, etc.) and subscribe to the feed to get push notifications. This journey explores the use of Discovery Service to get the most trending topics in news or a specific category of news.
 
 Once you are done with this journey you will know how to:
 
@@ -112,3 +112,7 @@ Go to the URL that is printed at the end after deployment is done and you can vi
 ![RSS feed notification](https://raw.githubusercontent.com/IBM/watson-discovery-news-trending-topics/master/docs/rss-2.png)
 
 ![RSS feed notifications](https://raw.githubusercontent.com/IBM/watson-discovery-news-trending-topics/master/docs/rss-1.png)
+
+## RSS Feed Usage
+
+Since RSS feed is a standard way to consume constantly changing data such as news, we can use the RSS feeds we generated to also post news articles to your organizations [slack channel](https://get.slack.help/hc/en-us/articles/218688467-Add-RSS-feeds-to-Slack) to track trends in your industry, or consume the feed to generate a dialy digest of news and email in the morning. Other uses may include automaticaly posting tweets to a twitter account on news articles on trending topics using a service called [IFTTT](https://ifttt.com/connect/feed/twitter).
